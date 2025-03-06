@@ -94,8 +94,16 @@ const App = () => {
   // turn zombieFighters into state so it can be updated when a fighter is added
   const [zombieFighters, setZombieFighters] = useState(allZombieFighters);
 
-  // TODO: update handleAddFighter to remove a fighter that's been added to the team
-  // TODO: use filter() to create a new array without the selected fighter
+  // use reduce to iterate through team array and accumulate to a single strength value
+  // start with 0 as initial value
+  // add each fighter's strength to the total
+  // reduce((accumulator, currentValue) => {operation}, initialValue)
+  // accumulator keeps track of running sum
+  // currentValue represents the current fighter object as reduce loops through
+  // operation
+  // second argument: initial value of 0
+  const totalStrength = teamState.reduce((total, fighter) => total + fighter.strength, 0) ;
+
   const handleAddFighter = (selectedFighter) => {
     //first check if they can afford the fighter's services lol
     if (money < selectedFighter.price) {
@@ -156,32 +164,14 @@ const App = () => {
       )
       }
 
+      <h3>Total Strength: {totalStrength} </h3>
+
     </>
   );
 }
 
 export default App;
 
-// Now that you can add characters to your team let’s focus on displaying and managing them within your application’s interface.
-// First, verify if your team array has any characters in it. If the team array length is 0, display Pick some team members! in the UI.
-// If there are characters in your team, display each one in the UI. 
-// For each character in the team array, show their name, image, price, strength, and agility. Follow the same pattern you used to display the array of all characters.
-
-// Display the team’s total strength: In this step, you’ll create a variable to keep track of the total strength of your team and display it in the UI.
-// Create a regular variable named totalStrength. This does not need to be a state variable.
-// Calculate the total strength of the team and assign it to the totalStrength variable. 
-// This calculation should sum up the strength values of all characters currently on the team!
-// Show the value of totalStrength in the UI. If the team array is empty, totalStrength should be 0.
-
-// 🧠 Why doesn’t totalStrength need to be a state variable? 
-// Recall that every time a component is re-rendered in React, the code in that component re-runs. 
-// When the component re-renders, we can calculate the total strength of the team based on the data from the team state at that time.
-// If the team state changes, a re-render will be triggered, and totalStrength will be recalculated with the new team data.
-// Put another way, the only reason to create state variables is to use them to trigger re-renders or persist data between re-renders. 
-// Creating unneeded state variables only serves to add unnecessary complications.
-
-// With this in mind, what value are we holding in state now that could also be a regular variable? 
-// You don’t need to refactor your existing code to remove it from state - just identifying it is valuable.
 
 // Display the team’s total agility: Create a variable for the total agility of your team and display this value in the UI.
 // Create a variable named totalAgility. Just like with totalStrength, this should not be a state variable.
