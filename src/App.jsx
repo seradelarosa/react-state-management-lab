@@ -103,6 +103,7 @@ const App = () => {
   // operation
   // second argument: initial value of 0
   const totalStrength = teamState.reduce((total, fighter) => total + fighter.strength, 0) ;
+  const totalAgility = teamState.reduce((total, fighter) => total + fighter.agility, 0) ;
 
   const handleAddFighter = (selectedFighter) => {
     //first check if they can afford the fighter's services lol
@@ -165,6 +166,7 @@ const App = () => {
       }
 
       <h3>Total Strength: {totalStrength} </h3>
+      <h3>Total Strength: {totalAgility} </h3>
 
     </>
   );
@@ -172,12 +174,6 @@ const App = () => {
 
 export default App;
 
-
-// Display the team’s total agility: Create a variable for the total agility of your team and display this value in the UI.
-// Create a variable named totalAgility. Just like with totalStrength, this should not be a state variable.
-// Just like with strength, calculate the total agility of the team and assign it to the totalAgility variable. 
-// This should be the sum of the team members’ agility values.
-// The value of totalAgility should be displayed in the UI. As with strength, if your team is empty, totalAgility will be 0.
 // Add a Remove button to each of the characters on your team. 
 // This button, when clicked, should call a handler function to remove the character from your team.
 
