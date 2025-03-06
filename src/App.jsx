@@ -96,17 +96,17 @@ const App = () => {
 
   // TODO: update handleAddFighter to remove a fighter that's been added to the team
   // TODO: use filter() to create a new array without the selected fighter
-  const handleAddFighter = (fighter) => {
+  const handleAddFighter = (selectedFighter) => {
     //first check if they can afford the fighter's services lol
-    if (money < fighter.price) {
+    if (money < selectedFighter.price) {
       console.log("Not enough money");
       return;
     }
 
     //subtract fighter price from money
-    setMoney(money - fighter.price);
+    setMoney(money - selectedFighter.price);
     //duplicate current teamState, add the fighter to it, and set that as the new teamState
-    setTeamState([...teamState, fighter]);
+    setTeamState([...teamState, selectedFighter]);
     // keeps all fighters except the one the user just selected
     // filtering through the current zombieFighters array
     // check every fighter to make sure the fighter id is NOT the same as the selectedFighter.idd
@@ -138,7 +138,8 @@ const App = () => {
         {/* map through fighters in your teamState */}
         {teamState.map(fighter => (
           <ZombieFighter
-            key={fighter.id}
+          // creating a unique id that's more specific since fighter is the same
+            key={`team-${fighter.id}`}
             fighter={fighter}
           />
         ))}
@@ -149,12 +150,6 @@ const App = () => {
 }
 
 export default App;
-
-// Each character comes with a price. Upon adding a character to your team, subtract the character’s price from your current money value. 
-// Think of it as spending money to recruit a team member. 
-// Before adding a character to the team, check if you have enough money to afford them. 
-// If your money is less than the character’s price, you shouldn’t be able to add them. 
-// In such cases, log a message to the console, such as "Not enough money".
  
 // Now that you can add characters to your team let’s focus on displaying and managing them within your application’s interface.
 // First, verify if your team array has any characters in it. If the team array length is 0, display Pick some team members! in the UI.
