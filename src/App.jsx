@@ -189,31 +189,3 @@ const App = () => {
 }
 
 export default App;
-
-// Add a Remove button to each of the characters on your team. 
-// This button, when clicked, should call a handler function to remove the character from your team.
-// Create a function named handleRemoveFighter(). It should accept a fighter object as an argument. 
-// This handler function is key to managing your team. 
-// This function enables you to remove characters and adjust your total money.
-// This function will be executed when you click the Remove button for a character in your team.
-// In the function, determine which character needs to be removed based on user interaction 
-// (This will look very similar to what you did in the handleAddFighter() function).
-// Once the character to be removed is identified, the team state should be updated to exclude this character. 
-// This can be achieved by creating a new array that filters out the selected character. 
-// Once you have the new array, use it to set the team state.
-
-// The character that was removed from the team state should be added to the zombieFighters array.
-// Increase the money state by the price of the removed character, effectively refunding the cost to your budget.
-// Ensure that the UI reflects the removal of the character from your team. 
-// This includes updates to the total strength and agility displays, as well as the available money.
-
-
-// Hints
-// You should never change state directly. If you need to make a copy of an array, you can use the syntax const copyArray = [...sourceArray].
-// You can use any method you’d like to get the total strength and agility of the team - the array’s reduce() method may be handy here, but any loop that will find the sum of these attributes will work.
-// Optionally, if you want to add some polish to the app, you could replace the placeholder images with character images. An AI assistant may be helpful in this task.
-// Optionally, you could also make it so a message displays in the browser when there isn’t enough budget to add a team member.
-
-
-
-
