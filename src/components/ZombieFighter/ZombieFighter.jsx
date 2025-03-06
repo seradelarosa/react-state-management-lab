@@ -1,4 +1,4 @@
-const ZombieFighter = ({fighter, handleAddFighter, showAddButton}) => {
+const ZombieFighter = ({fighter, handleAddFighter, handleRemoveFighter, showAddButton, showRemoveButton}) => {
 
     return (
         <li>
@@ -10,6 +10,10 @@ const ZombieFighter = ({fighter, handleAddFighter, showAddButton}) => {
             {/* Show the button only when showAddButton is true */}
             {showAddButton && (
                 <button onClick={() => handleAddFighter(fighter)}>Add</button>
+            )}
+            {/* Show remove button if the fighter is on the team */}
+            {showRemoveButton && (
+                <button onClick={()=> handleRemoveFighter(fighter)}>Remove</button>
             )}
         </li>
     );

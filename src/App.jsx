@@ -102,8 +102,8 @@ const App = () => {
   // currentValue represents the current fighter object as reduce loops through
   // operation
   // second argument: initial value of 0
-  const totalStrength = teamState.reduce((total, fighter) => total + fighter.strength, 0) ;
-  const totalAgility = teamState.reduce((total, fighter) => total + fighter.agility, 0) ;
+  const totalStrength = teamState.reduce((total, fighter) => total + fighter.strength, 0);
+  const totalAgility = teamState.reduce((total, fighter) => total + fighter.agility, 0);
 
   const handleAddFighter = (selectedFighter) => {
     //first check if they can afford the fighter's services lol
@@ -124,6 +124,18 @@ const App = () => {
     setZombieFighters(zombieFighters.filter(fighterInArray => fighterInArray.id !== selectedFighter.id));
   };
 
+  const handleRemoveFighter = (selectedFighter) => {
+    // refund the cost of the fighter by increasing the money state
+    setMoney(money + selectedFighter.price);
+
+    // remove the selected fighter from teamState
+    //create a new array that excludes the selectedFighter from the teamState
+    setTeamState(teamState.filter(fighterInTeam => fighterInTeam.id !== selectedFighter.id));
+
+    // add the fighter back to the zombieFighters array
+    setZombieFighters([...zombieFighters, selectedFighter]);
+  };
+
   return (
     <>
       <p>Your money: {money}</p>
@@ -139,6 +151,7 @@ const App = () => {
             handleAddFighter={handleAddFighter}
             // show add button
             showAddButton={true}
+            showRemoveButton={false}
           />
 
         ))}
@@ -157,8 +170,11 @@ const App = () => {
             <ZombieFighter
               key={`team-${fighter.id}`}
               fighter={fighter}
+              //pass ability to remove a fighter to use in remove button
+              handleRemoveFighter={handleRemoveFighter}
               // disable the sdd button since they are already in the team
               showAddButton={false}
+              showRemoveButton={true}
             />
           ))}
         </ul>
@@ -176,7 +192,6 @@ export default App;
 
 // Add a Remove button to each of the characters on your team. 
 // This button, when clicked, should call a handler function to remove the character from your team.
-
 // Create a function named handleRemoveFighter(). It should accept a fighter object as an argument. 
 // This handler function is key to managing your team. 
 // This function enables you to remove characters and adjust your total money.
