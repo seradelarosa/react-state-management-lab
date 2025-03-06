@@ -128,29 +128,40 @@ const App = () => {
             key={fighter.id}
             fighter={fighter}
             handleAddFighter={handleAddFighter}
+            // show add button
+            showAddButton={true}
           />
 
         ))}
       </ul>
 
       <h2>Your Team:</h2>
-      <ul>
-        {/* map through fighters in your teamState */}
-        {teamState.map(fighter => (
-          <ZombieFighter
-          // creating a unique id that's more specific since fighter is the same
-            key={`team-${fighter.id}`}
-            fighter={fighter}
-          />
-        ))}
-      </ul>
+
+      {/* TODO: run a check to see if the user has any fighters. */}
+      {/* if there are none, prompt the user to add some fighters. */}
+      {teamState.length === 0 ? (
+        <p>Pick some team members!</p>
+      ) : (
+        <ul>
+          {/* map through fighters in your teamState */}
+          {teamState.map(fighter => (
+            <ZombieFighter
+              key={`team-${fighter.id}`}
+              fighter={fighter}
+              // disable the sdd button since they are already in the team
+              showAddButton={false}
+            />
+          ))}
+        </ul>
+      )
+      }
 
     </>
   );
 }
 
 export default App;
- 
+
 // Now that you can add characters to your team let’s focus on displaying and managing them within your application’s interface.
 // First, verify if your team array has any characters in it. If the team array length is 0, display Pick some team members! in the UI.
 // If there are characters in your team, display each one in the UI. 

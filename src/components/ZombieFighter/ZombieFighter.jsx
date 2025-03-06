@@ -1,13 +1,16 @@
-const ZombieFighter = ({fighter, handleAddFighter}) => {
+const ZombieFighter = ({fighter, handleAddFighter, showAddButton}) => {
 
     return (
         <li>
-            {fighter.img},
+            <img src={fighter.img}/>
             <h3>Name: {fighter.name}</h3>
             <p>Price: {fighter.price}</p>
             <p>Strength: {fighter.strength}</p>
             <p>Agility: {fighter.agility}</p>
-            <button onClick= {() => handleAddFighter(fighter)}>Add</button>
+            {/* Show the button only when showAddButton is true */}
+            {showAddButton && (
+                <button onClick={() => handleAddFighter(fighter)}>Add</button>
+            )}
         </li>
     );
 };
