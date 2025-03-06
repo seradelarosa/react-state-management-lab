@@ -86,20 +86,18 @@ const allZombieFighters = [
   },
 ]
 
-
-
 const App = () => {
-  //create team state variable with initial state as an empty array
+  // create team state variable with initial state as an empty array
   const [teamState, setTeamState] = useState([]);
-  //Create a new state variable named money and set the initial state to 100
+  // Create a new state variable named money and set the initial state to 100
   const [money, setMoney] = useState(100);
   // turn zombieFighters into state so it can be updated when a fighter is added
-  const [zombieFighters, setZombieFighters] = useState();
+  const [zombieFighters, setZombieFighters] = useState(allZombieFighters);
 
-  // TODO: update handleAssFighter to remove a fighter that's been added to the team
+  // TODO: update handleAddFighter to remove a fighter that's been added to the team
   // TODO: use filter() to create a new array without the selected fighter
   const handleAddFighter = (fighter) => {
-    //if you can't afford that fighter...
+    //first check if they can afford the fighter's services lol
     if (money < fighter.price) {
       console.log("Not enough money");
       return;
@@ -109,6 +107,12 @@ const App = () => {
     setMoney(money - fighter.price);
     //duplicate current teamState, add the fighter to it, and set that as the new teamState
     setTeamState([...teamState, fighter]);
+    // keeps all fighters except the one the user just selected
+    // filtering through the current zombieFighters array
+    // check every fighter to make sure the fighter id is NOT the same as the selectedFighter.idd
+    // Take every fighter with ids that do not match the selectedFighter.id and set that as the new zombieFighters state
+    // for each fighter, if it meets this criteria, (fighterInArray.id !== selectedFighter.id), it keeps it
+    setZombieFighters(zombieFighters.filter(fighterInArray => fighterInArray.id !== selectedFighter.id));
   };
 
   return (
@@ -145,14 +149,6 @@ const App = () => {
 }
 
 export default App;
-
-// You’ll also need to remove the character from the zombieFighters state so they can’t be added again. 
-// To do this, you’ll need to determine which character needs to be removed. 
-// Notice how each fighter has a unique id? Maybe you could use that to help you decide which one needs to be removed.
-
-// Once the character to be removed is identified, the zombieFighters state should be updated to exclude this character. 
-// This can be achieved by creating a new array that filters out the selected character. 
-// Once you have the new array, use it to set the zombieFighters state.
 
 // Each character comes with a price. Upon adding a character to your team, subtract the character’s price from your current money value. 
 // Think of it as spending money to recruit a team member. 
